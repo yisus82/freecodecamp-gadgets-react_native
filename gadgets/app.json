@@ -1,7 +1,9 @@
 {
   "expo": {
     "name": "gadgets",
+    "description": "A gadgets app built with React Native and Expo",
     "slug": "gadgets",
+    "scheme": "gadgets",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +22,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router", "expo-status-bar"],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
