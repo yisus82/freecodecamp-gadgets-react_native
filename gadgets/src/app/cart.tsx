@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const Cart = () => (
   <View style={styles.container}>
     <Text style={styles.text}>Cart</Text>
-    <Link href='/' style={styles.link}>
+    <Link href='/' dismissTo style={styles.link}>
       Go back to Home
     </Link>
   </View>
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 18,
     color: 'blue',
-    textDecorationLine: 'underline',
   },
 });
 

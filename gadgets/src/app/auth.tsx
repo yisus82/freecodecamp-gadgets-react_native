@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 18,
     color: 'blue',
-    textDecorationLine: 'underline',
   },
 });
 

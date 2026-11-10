@@ -1,12 +1,17 @@
-import { Link, useLocalSearchParams } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 
 const Product = () => {
   const { slug } = useLocalSearchParams<{ slug: string }>();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Product: {slug}</Text>
+      <Stack.Screen
+        options={{
+          title: `Product: ${slug}`,
+          headerShown: true,
+        }}
+      />
       <Link href='/' style={styles.link}>
         Go back to Home
       </Link>
@@ -20,14 +25,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   link: {
     fontSize: 18,
     color: 'blue',
-    textDecorationLine: 'underline',
   },
 });
 
