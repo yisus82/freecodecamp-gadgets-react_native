@@ -1,6 +1,7 @@
 import type { ImageSourcePropType } from 'react-native';
 
 export type Category = {
+  id: number;
   name: string;
   imageUrl: ImageSourcePropType;
   slug: string;
@@ -21,7 +22,7 @@ export type Product = {
 export type OrderStatus = 'Pending' | 'Completed' | 'Shipped' | 'InTransit';
 
 export type Order = {
-  id: string;
+  id: number;
   slug: string;
   item: string;
   details: string;
