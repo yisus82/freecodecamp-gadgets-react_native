@@ -6,7 +6,6 @@ const ShopLayout = () => (
       name='index'
       options={{
         title: 'Home',
-        headerShown: true,
       }}
     />
   </Stack>

@@ -1,7 +1,6 @@
 import Lucide from '@react-native-vector-icons/lucide';
 import { Tabs } from 'expo-router';
-import { StyleSheet, type ColorValue } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { type ColorValue } from 'react-native';
 
 type TabBarIconProps = {
   name: React.ComponentProps<typeof Lucide>['name'];
@@ -13,48 +12,40 @@ const TabBarIcon = ({ name, color }: TabBarIconProps) => {
 };
 
 const TabsLayout = () => (
-  <SafeAreaView edges={['top']} style={styles.safeArea}>
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: '#1BC464',
-        tabBarInactiveTintColor: 'gray',
-        tabBarLabelStyle: {
-          fontSize: 16,
+  <Tabs
+    screenOptions={{
+      tabBarActiveTintColor: '#1BC464',
+      tabBarInactiveTintColor: 'gray',
+      tabBarLabelStyle: {
+        fontSize: 16,
+      },
+      tabBarStyle: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingTop: 10,
+      },
+      headerShown: false,
+    }}
+  >
+    <Tabs.Screen
+      name='(shop)'
+      options={{
+        title: 'Shop',
+        tabBarIcon({ focused }) {
+          return <TabBarIcon name='shopping-cart' color={focused ? '#1BC464' : 'gray'} />;
         },
-        tabBarStyle: {
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          paddingTop: 10,
-        },
-        headerShown: false,
       }}
-    >
-      <Tabs.Screen
-        name='(shop)'
-        options={{
-          title: 'Shop',
-          tabBarIcon({ focused }) {
-            return <TabBarIcon name='shopping-cart' color={focused ? '#1BC464' : 'gray'} />;
-          },
-        }}
-      />
-      <Tabs.Screen
-        name='orders'
-        options={{
-          title: 'Orders',
-          tabBarIcon({ focused }) {
-            return <TabBarIcon name='book' color={focused ? '#1BC464' : 'gray'} />;
-          },
-        }}
-      />
-    </Tabs>
-  </SafeAreaView>
+    />
+    <Tabs.Screen
+      name='orders'
+      options={{
+        title: 'Orders',
+        tabBarIcon({ focused }) {
+          return <TabBarIcon name='book' color={focused ? '#1BC464' : 'gray'} />;
+        },
+      }}
+    />
+  </Tabs>
 );
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-});
 
 export default TabsLayout;

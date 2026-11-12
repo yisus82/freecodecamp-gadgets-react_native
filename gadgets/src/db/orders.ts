@@ -1,5 +1,4 @@
 import { Order } from '@/types/gadgets';
-import { PRODUCTS } from './products';
 
 export const ORDERS: Order[] = [
   {
@@ -9,7 +8,7 @@ export const ORDERS: Order[] = [
     status: 'Pending',
     slug: 'order-1',
     date: new Date('2024-07-01T10:00:00Z'),
-    items: [PRODUCTS[1], PRODUCTS[2]],
+    items: [2, 3],
   },
   {
     id: 2,
@@ -18,7 +17,7 @@ export const ORDERS: Order[] = [
     status: 'Completed',
     slug: 'order-2',
     date: new Date('2024-07-02T14:30:00Z'),
-    items: [PRODUCTS[2], PRODUCTS[2]],
+    items: [3, 3],
   },
   {
     id: 3,
@@ -27,7 +26,7 @@ export const ORDERS: Order[] = [
     status: 'Shipped',
     slug: 'order-3',
     date: new Date('2024-07-03T09:15:00Z'),
-    items: [PRODUCTS[3], PRODUCTS[4]],
+    items: [4, 5],
   },
   {
     id: 4,
@@ -36,6 +35,6 @@ export const ORDERS: Order[] = [
     status: 'InTransit',
     slug: 'order-4',
     date: new Date('2024-07-04T10:00:00Z'),
-    items: [PRODUCTS[5], PRODUCTS[6], PRODUCTS[0]],
+    items: [5, 6, 1],
   },
 ];

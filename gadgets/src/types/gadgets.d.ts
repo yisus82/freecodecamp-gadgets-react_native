@@ -3,9 +3,9 @@ import type { ImageSourcePropType } from 'react-native';
 export type Category = {
   id: number;
   name: string;
-  imageUrl: ImageSourcePropType;
+  image: ImageSourcePropType;
   slug: string;
-  products: Product[];
+  products: number[];
 };
 
 export type Product = {
@@ -15,7 +15,7 @@ export type Product = {
   imagesUrl: ImageSourcePropType[];
   price: number;
   heroImage: ImageSourcePropType;
-  category: Omit<Category, 'products'>;
+  category: number;
   maxQuantity: number;
 };
 
@@ -28,5 +28,5 @@ export type Order = {
   details: string;
   status: OrderStatus;
   date: Date;
-  items: Product[];
+  items: number[];
 };

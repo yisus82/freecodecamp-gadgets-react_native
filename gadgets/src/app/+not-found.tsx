@@ -2,14 +2,12 @@ import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
 const NotFoundScreen = () => (
-  <>
-    <View style={styles.container}>
-      <Text style={styles.text}> Oops! This screen doesn't exist.</Text>
-      <Link style={styles.link} href='/'>
-        Go to home screen
-      </Link>
-    </View>
-  </>
+  <View style={styles.container}>
+    <Text style={styles.text}> Oops! This screen doesn't exist.</Text>
+    <Link style={styles.link} href='/'>
+      Go to home screen
+    </Link>
+  </View>
 );
 
 const styles = StyleSheet.create({

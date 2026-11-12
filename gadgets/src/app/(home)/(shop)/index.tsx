@@ -1,32 +1,44 @@
-import { Link } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import ProductListHeader from '@/components/ProductListHeader';
+import ProductListItem from '@/components/ProductListItem';
+import { CATEGORIES } from '@/db/categories';
+import { PRODUCTS } from '@/db/products';
+import { FlatList, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => (
-  <View style={styles.container}>
-    <Link href='/categories/category-1' style={styles.link}>
-      Go to Category 1
-    </Link>
-    <Link href='/products/product-1' style={styles.link}>
-      Go to Product 1
-    </Link>
-    <Link href='/auth' style={styles.link}>
-      Go to Auth
-    </Link>
-    <Link href='/cart' style={styles.link}>
-      Go to Cart
-    </Link>
-  </View>
+  <SafeAreaView style={styles.safeArea}>
+    <FlatList
+      data={PRODUCTS}
+      renderItem={({ item }) => <ProductListItem product={item} />}
+      keyExtractor={item => item.id.toString()}
+      numColumns={2}
+      ListHeaderComponent={() => <ProductListHeader categories={CATEGORIES} />}
+      contentContainerStyle={styles.flatListContent}
+      columnWrapperStyle={styles.flatListColumn}
+      style={styles.flatList}
+    />
+  </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  link: {
-    fontSize: 18,
-    color: 'blue',
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  flatListContent: {
+    paddingBottom: 20,
+  },
+  flatListColumn: {
+    justifyContent: 'space-between',
+  },
+  flatList: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
 });
 
