@@ -2,11 +2,10 @@ import ProductListHeader from '@/components/ProductListHeader';
 import ProductListItem from '@/components/ProductListItem';
 import { CATEGORIES } from '@/db/categories';
 import { PRODUCTS } from '@/db/products';
-import { FlatList, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 const Home = () => (
-  <SafeAreaView style={styles.safeArea}>
+  <View style={styles.container}>
     <FlatList
       data={PRODUCTS}
       renderItem={({ item }) => <ProductListItem product={item} />}
@@ -17,18 +16,13 @@ const Home = () => (
       columnWrapperStyle={styles.flatListColumn}
       style={styles.flatList}
     />
-  </SafeAreaView>
+  </View>
 );
 
 const styles = StyleSheet.create({
-  safeArea: {
+  container: {
     flex: 1,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: 'center',
+    paddingHorizontal: 16,
   },
   flatListContent: {
     paddingBottom: 20,
