@@ -12,7 +12,7 @@ export type Product = {
   id: number;
   title: string;
   slug: string;
-  imagesUrl: ImageSourcePropType[];
+  images: ImageSourcePropType[];
   price: number;
   heroImage: ImageSourcePropType;
   category: number;

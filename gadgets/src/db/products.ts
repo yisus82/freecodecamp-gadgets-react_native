@@ -6,7 +6,7 @@ export const PRODUCTS: Product[] = [
     title: 'Macbook Pro (2024)',
     slug: 'macbook-pro-2024',
     heroImage: require('@images/products/mac-book-1.jpg'),
-    imagesUrl: [
+    images: [
       require('@images/products/mac-book-1.jpg'),
       require('@images/products/mac-book-2.jpg'),
       require('@images/products/mac-book-3.jpg'),
@@ -20,10 +20,7 @@ export const PRODUCTS: Product[] = [
     title: 'IPhone 15',
     slug: 'i-phone-15',
     heroImage: require('@images/products/i-phone-1.jpg'),
-    imagesUrl: [
-      require('@images/products/i-phone-2.jpg'),
-      require('@images/products/i-phone-3.jpg'),
-    ],
+    images: [require('@images/products/i-phone-2.jpg'), require('@images/products/i-phone-3.jpg')],
     price: 999.99,
     category: 2,
     maxQuantity: 10,
@@ -33,7 +30,7 @@ export const PRODUCTS: Product[] = [
     title: 'Headset',
     slug: 'headset',
     heroImage: require('@images/products/head-set-1.jpg'),
-    imagesUrl: [
+    images: [
       require('@images/products/head-set-1.jpg'),
       require('@images/products/head-set-2.jpg'),
     ],
@@ -46,7 +43,7 @@ export const PRODUCTS: Product[] = [
     title: 'PlayStation 5',
     slug: 'playstation-5',
     heroImage: require('@images/products/ps-5-1.jpg'),
-    imagesUrl: [
+    images: [
       require('@images/products/ps-5-1.jpg'),
       require('@images/products/ps-5-2.jpg'),
       require('@images/products/ps-5-3.jpg'),
@@ -60,7 +57,7 @@ export const PRODUCTS: Product[] = [
     title: 'Dell XPS 13',
     slug: 'dell-xps-13',
     heroImage: require('@images/products/dell-1.jpg'),
-    imagesUrl: [require('@images/products/dell-1.jpg'), require('@images/products/dell-2.jpg')],
+    images: [require('@images/products/dell-1.jpg'), require('@images/products/dell-2.jpg')],
     price: 1099.99,
     category: 1,
     maxQuantity: 7,
@@ -70,10 +67,7 @@ export const PRODUCTS: Product[] = [
     title: 'Samsung Galaxy S21',
     slug: 'samsung-galaxy-s21',
     heroImage: require('@images/products/samsung-1.jpg'),
-    imagesUrl: [
-      require('@images/products/samsung-1.jpg'),
-      require('@images/products/samsung-2.jpg'),
-    ],
+    images: [require('@images/products/samsung-1.jpg'), require('@images/products/samsung-2.jpg')],
     price: 799.99,
     category: 2,
     maxQuantity: 12,
@@ -83,7 +77,7 @@ export const PRODUCTS: Product[] = [
     title: 'Nintendo Switch',
     slug: 'nintendo-switch',
     heroImage: require('@images/products/nintendo-switch-1.jpg'),
-    imagesUrl: [
+    images: [
       require('@images/products/nintendo-switch-1.jpg'),
       require('@images/products/nintendo-switch-2.jpg'),
     ],

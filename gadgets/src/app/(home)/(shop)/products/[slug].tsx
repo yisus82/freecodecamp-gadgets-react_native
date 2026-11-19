@@ -1,33 +1,237 @@
+import { PRODUCTS } from '@/db/products';
+import { useCartStore } from '@/store/cart-store';
 import { Link, useLocalSearchParams } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useToast } from 'react-native-toast-notifications';
 
 const Product = () => {
   const { slug } = useLocalSearchParams<{ slug: string }>();
+  const toast = useToast();
+
+  const product = PRODUCTS.find(p => p.slug === slug);
+  if (!product) {
+    return (
+      <View style={styles.notFoundContainer}>
+        <Text style={styles.notFoundText}>
+          Product not found: <Text style={styles.slugText}>{slug}</Text>
+        </Text>
+        <Link style={styles.link} href='/'>
+          Go to home screen
+        </Link>
+      </View>
+    );
+  }
+
+  const { items, addItem, removeItem, incrementItem, decrementItem } = useCartStore();
+
+  const initialQuantity = items.find(item => item.id === product.id)?.quantity || 0;
+
+  const [quantity, setQuantity] = useState(initialQuantity);
+
+  const increaseQuantity = () => {
+    if (quantity < product.maxQuantity) {
+      setQuantity(previousQuantity => previousQuantity + 1);
+      incrementItem(product.id);
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(previousQuantity => previousQuantity - 1);
+      decrementItem(product.id);
+    }
+  };
+
+  const addToCart = () => {
+    addItem({
+      id: product.id,
+      title: product.title,
+      heroImage: product.heroImage,
+      price: product.price,
+      quantity: 1,
+      maxQuantity: product.maxQuantity,
+    });
+    setQuantity(1);
+    toast.show('Added to cart', {
+      type: 'success',
+      placement: 'top',
+      duration: 1500,
+    });
+  };
+
+  const removeFromCart = () => {
+    removeItem(product.id);
+    setQuantity(0);
+    toast.show('Removed from cart', {
+      type: 'success',
+      placement: 'top',
+      duration: 1500,
+    });
+  };
+
+  const totalPrice = (product.price * quantity).toFixed(2);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Product: {slug}</Text>
-      <Link href='/' style={styles.link}>
-        Go back to Home
-      </Link>
+      <Image source={product.heroImage} style={styles.heroImage} />
+      <View style={styles.detailsContainer}>
+        <Text style={styles.title}>{product.title}</Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>Unit Price: ${product.price.toFixed(2)}</Text>
+          <Text style={styles.price}>Total Price: ${totalPrice}</Text>
+        </View>
+        <FlatList
+          data={product.images}
+          keyExtractor={(_item, index) => `product-image-${index}`}
+          renderItem={({ item }) => <Image source={item} style={styles.image} />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.imagesContainer}
+        />
+        <View style={styles.buttonContainer}>
+          {quantity > 0 ? (
+            <>
+              <TouchableOpacity
+                style={[styles.quantityButton, { opacity: quantity <= 1 ? 0.5 : 1 }]}
+                onPress={decreaseQuantity}
+                disabled={quantity <= 1}
+              >
+                <Text style={styles.quantityButtonText}>-</Text>
+              </TouchableOpacity>
+              <Text style={styles.quantity}>{quantity}</Text>
+              <TouchableOpacity
+                style={[
+                  styles.quantityButton,
+                  { opacity: quantity >= product.maxQuantity ? 0.5 : 1 },
+                ]}
+                onPress={increaseQuantity}
+                disabled={quantity >= product.maxQuantity}
+              >
+                <Text style={styles.quantityButtonText}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.removeFromCartButton} onPress={removeFromCart}>
+                <Text style={styles.removeFromCartText}>Remove from Cart</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <TouchableOpacity style={styles.addToCartButton} onPress={addToCart}>
+              <Text style={styles.addToCartText}>Add to Cart</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  notFoundContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  notFoundText: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  slugText: {
+    fontWeight: 'bold',
+  },
+  link: {
+    fontSize: 16,
+    color: 'blue',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  detailsContainer: {
+    padding: 16,
+    flex: 1,
+  },
+  heroImage: {
+    width: '100%',
+    height: 250,
+    resizeMode: 'cover',
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginVertical: 8,
   },
-  link: {
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  price: {
+    fontWeight: 'bold',
+    color: '#000',
+  },
+
+  imagesContainer: {
+    marginBottom: 16,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginRight: 8,
+    borderRadius: 8,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    paddingHorizontal: 16,
+  },
+  quantityButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#007bff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 8,
+  },
+  quantityButtonText: {
+    fontSize: 24,
+    color: '#fff',
+  },
+  quantity: {
     fontSize: 18,
-    color: 'blue',
+    fontWeight: 'bold',
+    marginHorizontal: 16,
+  },
+  addToCartButton: {
+    flex: 1,
+    backgroundColor: '#28a745',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 8,
+  },
+  addToCartText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  removeFromCartButton: {
+    flex: 1,
+    backgroundColor: '#dc3545',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 8,
+  },
+  removeFromCartText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
