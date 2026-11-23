@@ -1,8 +1,9 @@
 import { PRODUCTS } from '@/db/products';
 import { useCartStore } from '@/store/cart-store';
+import { Lucide } from '@react-native-vector-icons/lucide';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
 
 const Product = () => {
@@ -55,7 +56,7 @@ const Product = () => {
     setQuantity(1);
     toast.show('Added to cart', {
       type: 'success',
-      placement: 'top',
+      placement: 'center',
       duration: 1500,
     });
   };
@@ -65,7 +66,7 @@ const Product = () => {
     setQuantity(0);
     toast.show('Removed from cart', {
       type: 'success',
-      placement: 'top',
+      placement: 'center',
       duration: 1500,
     });
   };
@@ -92,32 +93,50 @@ const Product = () => {
         <View style={styles.buttonContainer}>
           {quantity > 0 ? (
             <>
-              <TouchableOpacity
-                style={[styles.quantityButton, { opacity: quantity <= 1 ? 0.5 : 1 }]}
+              <Pressable
+                style={{ ...styles.quantityButton, opacity: quantity <= 1 ? 0.5 : 1 }}
                 onPress={decreaseQuantity}
                 disabled={quantity <= 1}
               >
-                <Text style={styles.quantityButtonText}>-</Text>
-              </TouchableOpacity>
+                {({ pressed }) => (
+                  <Lucide
+                    name='minus'
+                    size={20}
+                    color='#fff'
+                    style={{ opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
               <Text style={styles.quantity}>{quantity}</Text>
-              <TouchableOpacity
-                style={[
-                  styles.quantityButton,
-                  { opacity: quantity >= product.maxQuantity ? 0.5 : 1 },
-                ]}
+              <Pressable
+                style={{
+                  ...styles.quantityButton,
+                  opacity: quantity >= product.maxQuantity ? 0.5 : 1,
+                }}
                 onPress={increaseQuantity}
                 disabled={quantity >= product.maxQuantity}
               >
-                <Text style={styles.quantityButtonText}>+</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.removeFromCartButton} onPress={removeFromCart}>
-                <Text style={styles.removeFromCartText}>Remove from Cart</Text>
-              </TouchableOpacity>
+                {({ pressed }) => (
+                  <Lucide
+                    name='plus'
+                    size={20}
+                    color='#fff'
+                    style={{ opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+              <Pressable style={styles.removeFromCartButton} onPress={removeFromCart}>
+                {({ pressed }) => (
+                  <Text style={{ ...styles.removeFromCartText, opacity: pressed ? 0.5 : 1 }}>
+                    Remove from Cart
+                  </Text>
+                )}
+              </Pressable>
             </>
           ) : (
-            <TouchableOpacity style={styles.addToCartButton} onPress={addToCart}>
+            <Pressable style={styles.addToCartButton} onPress={addToCart}>
               <Text style={styles.addToCartText}>Add to Cart</Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </View>
@@ -195,10 +214,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 8,
-  },
-  quantityButtonText: {
-    fontSize: 24,
-    color: '#fff',
   },
   quantity: {
     fontSize: 18,
