@@ -3,7 +3,7 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 type CartItemType = {
   id: number;
-  title: string;
+  name: string;
   heroImage: any;
   price: number;
   quantity: number;
@@ -21,7 +21,7 @@ const CartItem = ({ item, onDecrement, onIncrement, onRemove }: CartItemProps) =
   <View style={styles.cartItem}>
     <Image source={item.heroImage} style={styles.itemImage} />
     <View style={styles.itemDetails}>
-      <Text style={styles.itemTitle}>{item.title}</Text>
+      <Text style={styles.itemName}>{item.name}</Text>
       <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
       <View style={styles.quantityContainer}>
         <Pressable
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 16,
   },
-  itemTitle: {
+  itemName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 4,

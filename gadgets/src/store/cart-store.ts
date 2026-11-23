@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 type CartItemType = {
   id: number;
-  title: string;
+  name: string;
   heroImage: any;
   price: number;
   quantity: number;

@@ -13,7 +13,7 @@ const OrderListItem = ({ item }: OrderListItemProps) => (
     <Pressable style={styles.orderContainer}>
       <View style={styles.orderContent}>
         <View style={styles.orderDetailsContainer}>
-          <Text style={styles.orderItem}>{item.slug}</Text>
+          <Text style={styles.orderSlug}>{item.slug}</Text>
           <Text style={styles.orderDetails}>{item.details}</Text>
           <Text style={styles.orderDate}>{format(new Date(item.date), 'MMM dd, yyyy')}</Text>
         </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   orderDetailsContainer: {
     flex: 1,
   },
-  orderItem: {
+  orderSlug: {
     fontSize: 18,
     fontWeight: 'bold',
   },

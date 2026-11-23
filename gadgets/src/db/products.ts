@@ -3,7 +3,7 @@ import { Product } from '@/types/gadgets';
 export const PRODUCTS: Product[] = [
   {
     id: 1,
-    title: 'Macbook Pro (2024)',
+    name: 'Macbook Pro (2024)',
     slug: 'macbook-pro-2024',
     heroImage: require('@images/products/mac-book-1.jpg'),
     images: [
@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
-    title: 'IPhone 15',
+    name: 'IPhone 15',
     slug: 'i-phone-15',
     heroImage: require('@images/products/i-phone-1.jpg'),
     images: [require('@images/products/i-phone-2.jpg'), require('@images/products/i-phone-3.jpg')],
@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    title: 'Headset',
+    name: 'Headset',
     slug: 'headset',
     heroImage: require('@images/products/head-set-1.jpg'),
     images: [
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    title: 'PlayStation 5',
+    name: 'PlayStation 5',
     slug: 'playstation-5',
     heroImage: require('@images/products/ps-5-1.jpg'),
     images: [
@@ -54,7 +54,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    title: 'Dell XPS 13',
+    name: 'Dell XPS 13',
     slug: 'dell-xps-13',
     heroImage: require('@images/products/dell-1.jpg'),
     images: [require('@images/products/dell-1.jpg'), require('@images/products/dell-2.jpg')],
@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 6,
-    title: 'Samsung Galaxy S21',
+    name: 'Samsung Galaxy S21',
     slug: 'samsung-galaxy-s21',
     heroImage: require('@images/products/samsung-1.jpg'),
     images: [require('@images/products/samsung-1.jpg'), require('@images/products/samsung-2.jpg')],
@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 7,
-    title: 'Nintendo Switch',
+    name: 'Nintendo Switch',
     slug: 'nintendo-switch',
     heroImage: require('@images/products/nintendo-switch-1.jpg'),
     images: [

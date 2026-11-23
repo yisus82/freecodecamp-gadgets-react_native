@@ -47,7 +47,7 @@ const Product = () => {
   const addToCart = () => {
     addItem({
       id: product.id,
-      title: product.title,
+      name: product.name,
       heroImage: product.heroImage,
       price: product.price,
       quantity: 1,
@@ -77,7 +77,7 @@ const Product = () => {
     <View style={styles.container}>
       <Image source={product.heroImage} style={styles.heroImage} />
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{product.title}</Text>
+        <Text style={styles.name}>{product.name}</Text>
         <View style={styles.priceContainer}>
           <Text style={styles.price}>Unit Price: ${product.price.toFixed(2)}</Text>
           <Text style={styles.price}>Total Price: ${totalPrice}</Text>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     height: 250,
     resizeMode: 'cover',
   },
-  title: {
+  name: {
     fontSize: 24,
     fontWeight: 'bold',
     marginVertical: 8,
